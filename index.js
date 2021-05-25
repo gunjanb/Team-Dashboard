@@ -192,9 +192,9 @@ function startCollectingInfo() {
       //   console.log(response);
       //   console.log(response.emailId);
       //destructor the object and pass it to manager class
-      const { name, id, email, officeNo } = responsedata;
+      const { name, id, email, officeNumber } = responsedata;
       //  create an instance of manager with user input
-      const manager = new Manager(name, id, email, officeNo);
+      const manager = new Manager(name, id, email, officeNumber);
       // create object of kind manager and add it to allTeamMember array
       const addManager = {
         name: manager.getName(),
@@ -204,11 +204,8 @@ function startCollectingInfo() {
       };
 
       //store object in global array
-      allTeamMember.push(addManager);
-      const { name, id, email, officeNo } = data;
-      // instantiate object instance from data
-      const manager = new Manager(name, id, email, officeNo);
-      // return to menu
+      allTeamMembers.push(addManager);
+
       promptOtherQuestions();
     });
 }

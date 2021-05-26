@@ -1,9 +1,11 @@
+const Employee = require("./lib/employee.js");
 const Engineer = require("./lib/engineer.js");
 const Manager = require("./lib/manager.js");
 const Intern = require("./lib/intern.js");
 const inquirer = require("inquirer");
 const fs = require("fs");
 const generateMyTeamPage = require("./src/generatehtml.js");
+
 const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const regexNumber = /^[1-9]*\d$/;
 // an array to store manager and  team memebers which can be engg and intern from user
@@ -78,134 +80,25 @@ function startCollectingInfo() {
           }
         },
       },
-
-      // {
-      //   type: "confirm",
-      //   name: "tableContents",
-      //   message:
-      //     "Would you like to add table of contents in your README.md file ? :",
-      //   default: false,
-      // },
-      // {
-      //   type: "input",
-      //   name: "installationInfo",
-      //   message:
-      //     "What are the steps required to install your project? (please seperate the steps by ',') :",
-      //   validate: (installationInfo) => {
-      //     if (installationInfo) {
-      //       return true;
-      //     } else return "Please enter installation steps.";
-      //   },
-      // },
-      // {
-      //   type: "input",
-      //   name: "usageInfo",
-      //   message:
-      //     "Please provide instructions and examples for use.(please seperate the instructions by ',') :",
-      //   validate: (usageInfo) => {
-      //     if (usageInfo) {
-      //       return true;
-      //     } else return "Please enter usage steps.";
-      //   },
-      // },
-      // {
-      //   type: "list",
-      //   name: "licenseInfo",
-      //   message: "Choose a license for your project. :",
-      //   choices: ["Apache 2", "BSD 3", "BSD 2", "MIT", "MPL 2", "None"],
-      // },
-      // {
-      //   type: "confirm",
-      //   name: "contributorsIstrue",
-      //   message: "Would you like to add contributors?",
-      //   default: false,
-      // },
-      // {
-      //   type: "input",
-      //   name: "contributorInfo",
-      //   message:
-      //     "Please enter contributors information.(Please seperate the contributors name by ',') :",
-      //   validate: (contributorInfo) => {
-      //     if (contributorInfo) {
-      //       return true;
-      //     } else return "Please enter contributor Information.";
-      //   },
-      //   when: (answer) => {
-      //     //   console.log("answer is  ", answer);
-      //     if (answer.contributorsIstrue) {
-      //       return true;
-      //     } else {
-      //       return false;
-      //     }
-      //   },
-      // },
-      // {
-      //   type: "confirm",
-      //   name: "addingTestIsTrue",
-      //   message: "Would you like to add Tests for your project? :",
-      //   default: false,
-      // },
-      // {
-      //   type: "input",
-      //   name: "testInfo",
-      //   message:
-      //     "Please enter test information.(Please seperate the tests by ',') :",
-      //   validate: (testInfo) => {
-      //     if (testInfo) {
-      //       return true;
-      //     } else return "Please enter test Information.";
-      //   },
-      //   when: (answer) => {
-      //     if (answer.addingTestIsTrue) {
-      //       return true;
-      //     } else {
-      //       return false;
-      //     }
-      //   },
-      // },
-      // {
-      //   type: "confirm",
-      //   name: "technologyIsTrue",
-      //   message: "Would you like to add Technology stack used? :",
-      //   default: false,
-      // },
-      // {
-      //   type: "input",
-      //   name: "technologyInfo",
-      //   message:
-      //     "Please enter Technology Stack used.(Please seperate the technologies by ',') :",
-      //   validate: (technologyInfo) => {
-      //     if (technologyInfo) {
-      //       return true;
-      //     } else return "Please enter technology used.";
-      //   },
-      //   when: (answer) => {
-      //     if (answer.technologyIsTrue) {
-      //       return true;
-      //     } else {
-      //       return false;
-      //     }
-      //   },
-      // },
     ])
     .then((responsedata) => {
-      //   console.log(response);
+      console.log(responsedata);
       //   console.log(response.emailId);
       //destructor the object and pass it to manager class
-      const { name, id, email, officeNumber } = responsedata;
+      const { name, empId, emailId, officeNumber } = responsedata;
       //  create an instance of manager with user input
-      const manager = new Manager(name, id, email, officeNumber);
+      const manager = new Manager(name, empId, emailId, officeNumber);
       // create object of kind manager and add it to allTeamMember array
       const addManager = {
+        role: manager.getRole(),
         name: manager.getName(),
         id: manager.getId(),
         email: manager.getEmail(),
-        otherfield: manager.getofficeNumber(),
+        extrafield: manager.getofficeNumber(),
       };
-
+      console.log(addManager);
       //store object in global array
       allTeamMembers.push(addManager);
-
       promptOtherQuestions();
     });
 }

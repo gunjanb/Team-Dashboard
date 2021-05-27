@@ -44,13 +44,6 @@ function addCard(data) {
       </div>`;
   });
 
-  //
-  //<i class="fab fa-github">
-  //<school>
-  //manager
-  //glass
-  // intern
-
   //   const finalCard = arrayOfCards.join("\n");
   return arrayOfCards.join("\n");
 }

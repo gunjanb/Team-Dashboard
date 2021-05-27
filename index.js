@@ -8,17 +8,38 @@ const generateMyTeamPage = require("./src/generatehtml.js");
 
 const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const regexNumber = /^[1-9]*\d$/;
-// an array to store manager and  team memebers which can be engg and intern from user
+// an array to store manager and other team memebers which can be engg and intern from user
 //and passed to generateMyTeamPage
 allTeamMembers = [];
 
-// // Create an array of questions for user input
-// const questions = [];
+// function to copy css file
+function copycssFile() {
+  fs.copyFile("./src/style.css", "./dist/style.css", (err) => {
+    err
+      ? console.log(err)
+      : console.log(
+          "\n" +
+            "            *************** Style sheet copied successfully *************************\n"
+        );
+  });
+}
 
-// // Create a function to write README file
-// function writeToFile(fileName, data) {}
+//  function to write  file
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, (err) =>
+    err
+      ? console.log(err)
+      : console.log(
+          "\n" +
+            "            *************** Successfully generated Team DashBoard HTML **************\n"
+        )
+  );
+}
+
 const Done = () => {
   const generatedHtmlContent = generateMyTeamPage(allTeamMembers);
+  copycssFile();
+  writeToFile("./dist/index.html", generatedHtmlContent);
 };
 
 const getEngineerInfo = () => {
@@ -27,19 +48,19 @@ const getEngineerInfo = () => {
       {
         type: "input",
         name: "name",
-        message: "Please enter the team Engineer's Name :",
+        message: "Please enter team's EngineerName :",
         validate: (name) => {
           if (name) {
             return true;
           } else {
-            return "Please enter the team Engg's name.";
+            return "Please enter the team's Engg name.";
           }
         },
       },
       {
         type: "input",
         name: "empId",
-        message: "Please enter the team Engineer's Employee Id :",
+        message: "Please enter the team's Engineer EmployeeId :",
         validate: (empId) => {
           if (regexNumber.test(empId)) {
             return true;
@@ -51,7 +72,7 @@ const getEngineerInfo = () => {
       {
         type: "input",
         name: "emailId",
-        message: "Please enter the team Engineer's Email Id :",
+        message: "Please enter the team's Engineer EmailId :",
         validate: (emailId) => {
           if (regexEmail.test(emailId)) {
             return true;
@@ -63,7 +84,7 @@ const getEngineerInfo = () => {
       {
         type: "input",
         name: "githubUserName",
-        message: "Please enter  team Engineer's github User number :",
+        message: "Please enter team's Engineer github user name :",
         validate: (githubUserName) => {
           if (githubUserName) {
             return true;
@@ -75,12 +96,11 @@ const getEngineerInfo = () => {
     ])
     .then((responsedata) => {
       console.log(responsedata);
-      //   console.log(response.emailId);
-      //destructor the object and pass it to manager class
+      //destructor the object and pass it to engg class
       const { name, empId, emailId, githubUserName } = responsedata;
-      //  create an instance of manager with user input
+      //  create an instance of engg with user input
       const engineer = new Engineer(name, empId, emailId, githubUserName);
-      // create object of kind manager and add it to allTeamMember array
+      //create an object for allTeamMmenber having info from engg object
       const addEngineer = {
         role: engineer.getRole(),
         name: engineer.getName(),
@@ -100,19 +120,19 @@ const getInternInfo = () => {
       {
         type: "input",
         name: "name",
-        message: "Please enter the team Intern's Name :",
+        message: "Please enter the team's Intern Name :",
         validate: (name) => {
           if (name) {
             return true;
           } else {
-            return "Please enter the team Intern's name.";
+            return "Please enter the team's Intern name.";
           }
         },
       },
       {
         type: "input",
         name: "empId",
-        message: "Please enter the team Intern's Employee Id :",
+        message: "Please enter the team's Intern EmployeeId :",
         validate: (empId) => {
           if (regexNumber.test(empId)) {
             return true;
@@ -124,7 +144,7 @@ const getInternInfo = () => {
       {
         type: "input",
         name: "emailId",
-        message: "Please enter the team Intern's Email Id :",
+        message: "Please enter the team's Intern EmailId :",
         validate: (emailId) => {
           if (regexEmail.test(emailId)) {
             return true;
@@ -148,12 +168,11 @@ const getInternInfo = () => {
     ])
     .then((responsedata) => {
       console.log(responsedata);
-      //   console.log(response.emailId);
-      //destructor the object and pass it to manager class
+      //destructor the object and pass it to inter class
       const { name, empId, emailId, schoolName } = responsedata;
       //  create an instance of manager with user input
       const intern = new Intern(name, empId, emailId, schoolName);
-      // create object of kind manager and add it to allTeamMember array
+      //create an object for allTeamMmenber having info from intern object
       const addIntern = {
         role: intern.getRole(),
         name: intern.getName(),
@@ -185,22 +204,21 @@ const promptOtherQuestions = () => {
         getInternInfo();
       } else if (responsedata.employeeType === "Done") {
         Done();
-      } else {
-        //promptOtherQuestions();
       }
     });
 };
 
-// // Create a function to initialize app
+//function to ask and collect data for manager
 function startCollectingInfo() {
   //welcome msg
   console.log(
-    "            ******************** Welcome to Team Dashboard **************************\n"
+    "\n" +
+      "            ******************** Welcome to Team Dashboard **************************\n"
   );
   console.log(
-    "            ********************    Create your Team       **************************"
+    "            ********************    Create your Team       **************************\n"
   );
-  //collect manager info and add to teammem array
+  //collect manager info and add to allteammember array
   //prompted to enter the team manager’s name, employee ID, email address, and office number
 
   inquirer
@@ -232,7 +250,7 @@ function startCollectingInfo() {
       {
         type: "input",
         name: "emailId",
-        message: "Please enter the team Manager's Email Id :",
+        message: "Please enter the team Manager's EmailId :",
         validate: (emailId) => {
           if (regexEmail.test(emailId)) {
             return true;
@@ -255,13 +273,12 @@ function startCollectingInfo() {
       },
     ])
     .then((responsedata) => {
-      console.log(responsedata);
-      //   console.log(response.emailId);
+      // console.log(responsedata);
       //destructor the object and pass it to manager class
       const { name, empId, emailId, officeNumber } = responsedata;
-      //  create an instance of manager with user input
+      //create an instance of manager with user input
       const manager = new Manager(name, empId, emailId, officeNumber);
-      // create object of kind manager and add it to allTeamMember array
+      // create an object for allTeamMmenber having info from manager object
       const addManager = {
         role: manager.getRole(),
         name: manager.getName(),
@@ -275,5 +292,5 @@ function startCollectingInfo() {
     });
 }
 
-// // Function call to initialize app
+// Function call to initialize app
 startCollectingInfo();

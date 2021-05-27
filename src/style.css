@@ -1,0 +1,23 @@
+body {
+  background-color: #00b4d8;
+  /* #0077b6; */
+}
+
+.custom-header-color {
+  background-color: #023e8a;
+}
+
+.custom-text-color {
+  color: black;
+}
+
+.custom-card-bg-color {
+  background-color: #caf0f8;
+}
+
+.list-group-flush > .list-group-item {
+  border-width: thick;
+}
+.list-group-flush > .list-group-item:last-child {
+  border-width: thick;
+}

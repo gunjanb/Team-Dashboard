@@ -38,7 +38,7 @@ function writeToFile(fileName, data) {
 
 const Done = () => {
   const generatedHtmlContent = generateMyTeamPage(allTeamMembers);
-  copycssFile();
+  // copycssFile();
   writeToFile("./dist/index.html", generatedHtmlContent);
 };
 

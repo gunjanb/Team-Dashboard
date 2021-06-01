@@ -64,7 +64,7 @@ function templateHtml(data) {
           src="https://kit.fontawesome.com/3291b69a63.js"
           crossorigin="anonymous"
         ></script>
-        <link rel="stylesheet" href=./style.css />
+        <link rel="stylesheet" href=${__dirname}/style.css />
         <title>My Team</title>
       </head>
     

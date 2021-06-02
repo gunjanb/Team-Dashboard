@@ -57,6 +57,8 @@ As Testing is key to make code maintainable, unit tests are written for every pa
 ## Tests
 
 - Use command npm run test on terminal to run all tests and use command npm run test Employee on terminal to run all tests in Employee suite.
+  - Console ScreenShot
+    ![CLI](./images/testresults.jpg)
 
 ## Technologies
 

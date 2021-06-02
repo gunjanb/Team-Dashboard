@@ -16,6 +16,15 @@ function extrafieldLogo(role) {
   return `<i class="fas fa-school"></i>`;
 }
 
+function getcontent(teamObj) {
+  if (teamObj.role === "Manager") {
+    return `${teamObj.extrafield}`;
+  } else if (teamObj.role === "Engineer") {
+    return `<a href="https://github.com/${teamObj.extrafield}" target="_blank">${teamObj.extrafield}</a>`;
+  }
+  return `${teamObj.extrafield}`;
+}
+
 function addCard(data) {
   const arrayOfCards = data.map(function (teamObj) {
     return ` <div class="col my-4 d-flex justify-content-center">
@@ -36,7 +45,7 @@ function addCard(data) {
                 <a href="mailto:${teamObj.email}">${teamObj.email}</a>
               </li>
               <li class="list-group-item">
-                ${extrafieldLogo(teamObj.role)} : ${teamObj.extrafield}
+                 ${extrafieldLogo(teamObj.role)} : ${getcontent(teamObj)}
               </li>
             </ul>
           </div>

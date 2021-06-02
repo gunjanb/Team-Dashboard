@@ -6,6 +6,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const generateMyTeamPage = require("./src/generatehtml.js");
 
+// regex expressions for validating email and numbers
 const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const regexNumber = /^[1-9]*\d$/;
 // an array to store manager and other team memebers which can be engg and intern from user
@@ -95,7 +96,7 @@ const getEngineerInfo = () => {
       },
     ])
     .then((responsedata) => {
-      console.log(responsedata);
+      //console.log(responsedata);
       //destructor the object and pass it to engg class
       const { name, empId, emailId, githubUserName } = responsedata;
       //  create an instance of engg with user input
@@ -167,7 +168,7 @@ const getInternInfo = () => {
       },
     ])
     .then((responsedata) => {
-      console.log(responsedata);
+      // console.log(responsedata);
       //destructor the object and pass it to inter class
       const { name, empId, emailId, schoolName } = responsedata;
       //  create an instance of manager with user input

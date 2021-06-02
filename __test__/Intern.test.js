@@ -53,7 +53,7 @@ describe("Intern", () => {
     });
   });
 
-  describe("getGithub", () => {
+  describe("getschool", () => {
     it("should return the  school of an  intern", () => {
       // Create new objects to test with
       const intern = new Intern("Gunjan", 1, "gunjan@gmail.com", "UW");

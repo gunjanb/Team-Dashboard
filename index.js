@@ -40,7 +40,7 @@ function writeToFile(fileName, data) {
 const Done = () => {
   const generatedHtmlContent = generateMyTeamPage(allTeamMembers);
   // copycssFile();
-  writeToFile("./dist/index.html", generatedHtmlContent);
+  writeToFile("./dist1/index.html", generatedHtmlContent);
 };
 
 const getEngineerInfo = () => {
